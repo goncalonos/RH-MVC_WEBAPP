@@ -17,7 +17,9 @@ using REQGEST.Areas.Identity.Data;
 
 namespace REQGEST.Areas.Identity.Pages.Account
 {
-    [AllowAnonymous]
+    
+
+    [Authorize]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<AplicationUser> _signInManager;
@@ -146,7 +148,7 @@ namespace REQGEST.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new AplicationUser { UserName = Input.Email, Email = Input.Email, IdentificationDocument = Input.IdentificationDocument, FiscalNumber=Input.FiscalNumber, IBAN=Input.IBAN, ContactNumber=Input.ContactNumber,EmergencyNumber=Input.EmergencyNumber, Adress=Input.Adress, PostalCode=Input.PostalCode, City=Input.City, State=Input.State, Country=Input.Country, BirthDate=Input.BirthDate, Nacionality=Input.Nacionality, CivilStatus=Input.CivilStatus };
+                var user = new AplicationUser { UserName = Input.Email, Email = Input.Email, Name=Input.Name, IdentificationDocument = Input.IdentificationDocument, FiscalNumber=Input.FiscalNumber, IBAN=Input.IBAN, ContactNumber=Input.ContactNumber,EmergencyNumber=Input.EmergencyNumber, Adress=Input.Adress, PostalCode=Input.PostalCode, City=Input.City, State=Input.State, Country=Input.Country, BirthDate=Input.BirthDate, Nacionality=Input.Nacionality, CivilStatus=Input.CivilStatus };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
