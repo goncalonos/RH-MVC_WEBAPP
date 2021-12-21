@@ -17,8 +17,7 @@ using REQGEST.Areas.Identity.Data;
 
 namespace REQGEST.Areas.Identity.Pages.Account
 {
-    
-
+   
     [Authorize]
     public class RegisterModel : PageModel
     {
