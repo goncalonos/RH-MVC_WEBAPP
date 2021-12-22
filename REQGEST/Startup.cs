@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using REQGEST.Areas.Identity.Data;
+using REQGEST.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +28,19 @@ namespace REQGEST
         {
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddDbContext<ReqGestDbContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("ReqGestDbContextConnection")));
+
+            services.AddDefaultIdentity<AplicationUser>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+            })
+                .AddEntityFrameworkStores<ReqGestDbContext>();
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -56,5 +71,6 @@ namespace REQGEST
                 endpoints.MapRazorPages();
             });
         }
+
     }
 }

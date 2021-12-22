@@ -17,8 +17,14 @@ using REQGEST.Areas.Identity.Data;
 
 namespace REQGEST.Areas.Identity.Pages.Account
 {
+//<<<<<<< Updated upstream
    
     [Authorize]
+
+    
+
+    
+//>>>>>>> Stashed changes
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<AplicationUser> _signInManager;
